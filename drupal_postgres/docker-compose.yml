@@ -2,8 +2,7 @@ version: "3.4"
 
 services:
   drupal:
-    build: .
-    image: custom-drupal
+    image: drupal:8.8.2
     networks:
       - default_net
     ports:
@@ -13,7 +12,6 @@ services:
       - drupal-profiles:/var/www/html/profiles
       - drupal-sites:/var/www/html/sites
       - drupal-themes:/var/www/html/themes
-
   postgres:
     image: postgres:12.1
     networks:
@@ -21,13 +19,12 @@ services:
     environment:
       - POSTGRES_PASSWORD=example
     volumes:
-      - "drupal-data:/var/lib/postgresql/data"
-
+      - "drupal-postgres:/var/lib/postgresql/data"
 networks:
   default_net:
     external: true
 volumes:
-  drupal-data:
+  drupal-postgres:
   drupal-modules:
   drupal-profiles:
   drupal-sites:
